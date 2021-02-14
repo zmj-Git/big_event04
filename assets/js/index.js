@@ -1,5 +1,5 @@
 $(function () {
-    getUserInof();
+    getUserInfo();
 
     //退出
     var layer = layui.layer;
@@ -18,7 +18,7 @@ $(function () {
 
 //获取用户信息（封装到入口函数的外面）
 // 原因：后面其他的页面要调用
-function getUserInof() {
+function getUserInfo() {
     $.ajax({
         url: '/my/userinfo',
         // headers: {
@@ -27,7 +27,7 @@ function getUserInof() {
         success: function (res) {
             // console.log(res)
             if (res.status !== 0) {
-                return layui.layui.msg(res.message);
+                return layui.layer.msg(res.message);
             }
             //请求成功，渲染头像
             renderAvatar(res.data);
@@ -42,7 +42,7 @@ function renderAvatar(user) {
     // 渲染头像
     if (user.user_pic !== null) {
         //有头像
-        $('.layui-nav-img').show().attr("scr", user.user_pic);
+        $('.layui-nav-img').show().attr("src", user.user_pic);
         $('.text-avatar').hide();
     } else {
         //没有头像
